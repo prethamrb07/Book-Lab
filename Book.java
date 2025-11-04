@@ -1,6 +1,7 @@
 public class Book {
    public String pigLatin(String word){
-      String vowel = "aeiou";
+      String newWord = "";
+      String vowel = "aeiouy";
       String numbers = "1234567890";
       if(word.length()==0){
          return word;
@@ -15,10 +16,12 @@ public class Book {
       for (int i = 0; i < word.length(); i++){
          if (vowel.indexOf(word.substring(i, i+1))>=0){
             String left = word.substring ( 0,i);
-            String right = word.substring (i+1,word.length());
+            String right = word.substring (i,word.length());
             return right+left+"ay";
+            
          }
       }
+      return word;
    }
    public int endPunctuation(String word){
 
