@@ -5,6 +5,7 @@ public class Book {
       String numbers = "1234567890";
       String punctuation = "!?.:;";
       boolean a=false;
+      int b=0;
        if(word.length()==0){
          return word;
       }
