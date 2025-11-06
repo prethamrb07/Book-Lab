@@ -16,8 +16,40 @@ public class Book {
       }
       
       
-      if(a){
+      if(a==true){
          return word+"yay";
+         
+      }else if(punctuation.indexOf(word.substring(0,1))>=0){
+         for (int j = 0; j < word.length(); j++){
+            if (punctuation.indexOf(word.substring(j-1,j))>=0){
+               word = word.substring(0,j);
+               String allPunc = word.substring(j, word.length());
+               if (a==false){
+      
+
+      for (int i = 0; i < word.length(); i++){
+         if (vowel.indexOf(word.substring(i, i+1))>=0){
+            String left = word.substring ( 0,i);
+            String right = word.substring (i,word.length());
+            
+           
+
+            char firstLetter = word.charAt(0);
+
+            if (Character.isUpperCase(firstLetter)){
+               String first = right.substring(0,1).toUpperCase();
+               String remain = right.substring(1,right.length());
+               String left2 = left.toLowerCase();
+               return first+remain+left2+"ay"+allPunc;
+
+            }else{
+               return right+left+"ay"+ allPunc;
+            }
+         }
+      }
+   }
+            }
+         }
       }
       else if (vowel.indexOf(word.substring(0,1))>=0){
          return word + "yay";
@@ -25,7 +57,7 @@ public class Book {
          return word + "ay";
       }else if (word.length()==1){
          return word+"ay";
-      }else{
+      }else if (a==false){
       
 
       for (int i = 0; i < word.length(); i++){
