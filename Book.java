@@ -1,12 +1,15 @@
 import java.io.IOException;
 import java.util.Scanner;
 import java.net.URL;
+import java.io.FileWriter;
 
-
+ 
 
 public class Book {
 
-   private String book;
+   private String book = "";
+   private int count = 0;
+
 
    public Book(String url)
    {
@@ -19,11 +22,15 @@ public class Book {
       {
          URL url = new URL(link);
          Scanner s = new Scanner(url.openStream());
-         while(s.hasNext())
-         {
-            String text = translateSentence(s.nextLine());
-            System.out.println(text);
-            book += text;
+         try {
+            while(s.hasNext())
+            {
+               String text = translateSentence(s.nextLine());
+               System.out.println(text);
+               book += text + "\n";
+            }
+         } finally {
+            s.close();
          }
       }
       catch (IOException ex)
@@ -44,14 +51,11 @@ public class Book {
 
 
 
-
-
-
-
+   
 
 
    public String pigLatin(String word) {
-      String newWord = "";
+      count++;
       String vowel = "aeiouy";
       String numbers = "1234567890";
       String punctuation = "!?.:;";
@@ -134,6 +138,7 @@ public class Book {
       }
       lowerCaseWord += allPunc;
       return lowerCaseWord;
+      
    }
 
    public int endPunctuation(String word) {
@@ -155,6 +160,7 @@ public class Book {
       while (spaceIndex >= 0) {
          word = sentence.substring(0, spaceIndex);
          retSentence += (pigLatin(word) + " ");
+
          sentence = sentence.substring(spaceIndex + 1);
          spaceIndex = sentence.indexOf(" ");
       }
@@ -165,6 +171,18 @@ public class Book {
 
       return retSentence;
    }
+   public int getCount(){
+   return count;
+}
+
+public void saveToFile(String filename) {
+    try (FileWriter writer = new FileWriter(filename)) {
+        writer.write(book);
+    } catch (IOException e) {
+        System.out.println("Error saving book to file");
+        e.printStackTrace();
+    }
+}
 }
 
 // for (int i = 0; i < word.length(); i++){
@@ -179,3 +197,4 @@ public class Book {
 // String remain = right.substring(1,right.length());
 // String left2 = left.toLowerCase();
 // return first+remain+left2+"ay";
+
